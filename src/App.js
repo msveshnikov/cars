@@ -1,25 +1,35 @@
+import React from "react";
+import { useInput } from "./useInput";
+import { TextField, Button } from "@material-ui/core";
 import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Search = ({ search }) => {
+    const [title, resetTitle] = useInput("");
 
-export default App;
+    const searchHandler = (e) => {
+        e.preventDefault();
+        if (!title.value) {
+            return;
+        }
+        search(title.value);
+        resetTitle();
+    };
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo" />
+
+                <form onSubmit={searchHandler} className="search">
+                    <TextField label="Title" variant="outlined" type="text" {...title} />
+                    <Button type="submit" variant="contained" color="primary">
+                        SEARCH
+                    </Button>
+                </form>
+            </header>
+        </div>
+    );
+};
+
+export default Search;
