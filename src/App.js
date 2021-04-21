@@ -1,19 +1,21 @@
 import React from "react";
 import { useInput } from "./useInput";
 import { TextField, Button } from "@material-ui/core";
-import logo from './logo.svg';
+import logo from "./logo.svg";
 import "./App.css";
 
 const Search = ({ search }) => {
-    const [title, resetTitle] = useInput("");
+    const [year] = useInput("");
+    const [brand] = useInput("");
+    const [model] = useInput("");
+    const [vehicle] = useInput("");
+    const [gearbox] = useInput("");
+    const [kilo] = useInput("");
+    const [power] = useInput("");
 
     const searchHandler = (e) => {
         e.preventDefault();
-        if (!title.value) {
-            return;
-        }
-        search(title.value);
-        resetTitle();
+        search(year.value);
     };
 
     return (
@@ -22,9 +24,24 @@ const Search = ({ search }) => {
                 <img src={logo} className="App-logo" alt="logo" />
 
                 <form onSubmit={searchHandler} className="search">
-                    <TextField label="Title" variant="outlined" type="text" {...title} />
+                    <TextField label="Year" variant="outlined" type="text" {...year} />
+                    <br/>
+                    <TextField label="Brand" variant="outlined" type="text" {...brand} />
+                    <br/>
+                    <TextField label="Model" variant="outlined" type="text" {...model} />
+                    <br/>
+                    <TextField label="Vehicle" variant="outlined" type="text" {...vehicle} />
+                    <br/>
+                    <TextField label="Gearbox" variant="outlined" type="text" {...gearbox} />
+                    <br/>
+                    <TextField label="Mileage" variant="outlined" type="text" {...kilo} />
+                    <br/>
+                    <TextField label="Power" variant="outlined" type="text" {...power} />
+                    <br/>
+                    <br/>
+                    <br/>
                     <Button type="submit" variant="contained" color="primary">
-                        SEARCH
+                        CHECK PRICE
                     </Button>
                 </form>
             </header>
