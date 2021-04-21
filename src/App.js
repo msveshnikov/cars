@@ -4,7 +4,7 @@ import { TextField, Button } from "@material-ui/core";
 import logo from "./logo.svg";
 import "./App.css";
 
-const Search = ({ search }) => {
+const App = () => {
     const [year] = useInput("");
     const [brand] = useInput("");
     const [model] = useInput("");
@@ -15,7 +15,7 @@ const Search = ({ search }) => {
 
     const searchHandler = (e) => {
         e.preventDefault();
-        search(year.value);
+        // search(year.value);
     };
 
     return (
@@ -25,22 +25,21 @@ const Search = ({ search }) => {
 
                 <form onSubmit={searchHandler} className="search">
                     <TextField label="Year" variant="outlined" type="text" {...year} />
-                    <br/>
+                    <br />
                     <TextField label="Brand" variant="outlined" type="text" {...brand} />
-                    <br/>
+                    <br />
                     <TextField label="Model" variant="outlined" type="text" {...model} />
-                    <br/>
+                    <br />
                     <TextField label="Vehicle" variant="outlined" type="text" {...vehicle} />
-                    <br/>
+                    <br />
                     <TextField label="Gearbox" variant="outlined" type="text" {...gearbox} />
-                    <br/>
+                    <br />
                     <TextField label="Mileage" variant="outlined" type="text" {...kilo} />
-                    <br/>
+                    <br />
                     <TextField label="Power" variant="outlined" type="text" {...power} />
-                    <br/>
-                    <br/>
-                    <br/>
-                    <Button type="submit" variant="contained" color="primary">
+                    <br />
+                    <br />
+                    <Button type="submit" variant="contained" color="secondary">
                         CHECK PRICE
                     </Button>
                 </form>
@@ -49,4 +48,4 @@ const Search = ({ search }) => {
     );
 };
 
-export default Search;
+export default App;
