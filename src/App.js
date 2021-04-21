@@ -1,7 +1,7 @@
 import React from "react";
 import { useInput } from "./useInput";
 import { TextField, Button } from "@material-ui/core";
-import logo from "./logo.svg";
+import logo from "./assets/orange-car-hp-right-mercedez.png";
 import "./App.css";
 
 const App = () => {
