@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useInput } from "./useInput";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Typography } from "@material-ui/core";
 import logo from "./assets/orange-car-hp-right-mercedez.png";
 import "./App.css";
 
@@ -13,9 +13,15 @@ const App = () => {
     const [kilo] = useInput("");
     const [power] = useInput("");
 
+    const [price, setPrice] = useState();
+
     const searchHandler = (e) => {
         e.preventDefault();
-        // search(year.value);
+        fetch("https://elk.maxsoft.shop")
+            .then((res) => res.json())
+            .then((res) => {
+                setPrice(Math.round(res.price) + "€");
+            });
     };
 
     return (
@@ -40,9 +46,14 @@ const App = () => {
                     <br />
                     <br />
                     <Button type="submit" variant="contained" color="secondary">
-                        CHECK PRICE
+                        check price
                     </Button>
+                    <br />
                 </form>
+                <br />
+                <Typography color="black" variant="h3">
+                    {price}
+                </Typography>
             </header>
         </div>
     );
