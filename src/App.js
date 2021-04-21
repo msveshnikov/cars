@@ -17,10 +17,15 @@ const App = () => {
 
     const searchHandler = (e) => {
         e.preventDefault();
-        fetch("https://elk.maxsoft.shop")
+        fetch(
+            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox.value}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=benzin&notrepaireddamage=nein`
+        )
             .then((res) => res.json())
             .then((res) => {
-                setPrice(Math.round(res.price) + "€");
+                setPrice(Math.round(res.price * 26.5) + " CZK");
+            })
+            .catch((res) => {
+                console.log(res);
             });
     };
 
@@ -36,7 +41,7 @@ const App = () => {
                     <br />
                     <TextField label="Model" variant="outlined" type="text" {...model} />
                     <br />
-                    <TextField label="Vehicle" variant="outlined" type="text" {...vehicle} />
+                    <TextField label="Vehicle type" variant="outlined" type="text" {...vehicle} />
                     <br />
                     <TextField label="Gearbox" variant="outlined" type="text" {...gearbox} />
                     <br />
