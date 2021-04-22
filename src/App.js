@@ -12,7 +12,7 @@ const App = () => {
     const [year] = useInput("");
     const [brand] = useInput("");
     const [model] = useInput("");
-    const [vehicle] = useInput("");
+    const [vehicle, setVehicle] = useState("limousine");
     const [gearbox, setGearbox] = useState("manuell");
     const [kilo] = useInput("");
     const [power] = useInput("");
@@ -33,10 +33,14 @@ const App = () => {
         setFueltype(event.target.value);
     };
 
+    const handleVehicle = (event) => {
+        setVehicle(event.target.value);
+    };
+
     const searchHandler = (e) => {
         e.preventDefault();
         fetch(
-            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype}&notrepaireddamage=${notrepaireddamage}`
+            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype}&notrepaireddamage=${notrepaireddamage}`
         )
             .then((res) => res.json())
             .then((res) => {
@@ -59,13 +63,19 @@ const App = () => {
                     <br />
                     <TextField style={{ marginTop: 10 }} label="Model" variant="outlined" type="text" {...model} />
                     <br />
-                    <TextField
-                        style={{ marginTop: 10 }}
-                        label="Vehicle type"
-                        variant="outlined"
-                        type="text"
-                        {...vehicle}
-                    />
+                    <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
+                        <InputLabel>Vehicle Type</InputLabel>
+                        <Select name="vehicle" value={vehicle} onChange={handleVehicle}>
+                            <MenuItem value={"limousine"}>Sedan</MenuItem>
+                            <MenuItem value={"coupe"}>Coupe</MenuItem>
+                            <MenuItem value={"kleinwagen"}>Hatchback</MenuItem>
+                            <MenuItem value={"suv"}>SUV</MenuItem>
+                            <MenuItem value={"kombi"}>Combi</MenuItem>
+                            <MenuItem value={"cabrio"}>Cabriolet</MenuItem>
+                            <MenuItem value={"bus"}>Bus</MenuItem>
+                            <MenuItem value={"andere"}>Other</MenuItem>
+                        </Select>
+                    </FormControl>
                     <br />
                     <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
                         <InputLabel>Gearbox</InputLabel>
