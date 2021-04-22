@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useInput } from "./useInput";
-import { TextField, Button, Typography } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import logo from "./assets/orange-car-hp-right-mercedez.png";
 import "./App.css";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+import swal from "sweetalert";
 
 const App = () => {
     const [year] = useInput("");
@@ -60,8 +61,6 @@ const App = () => {
         "lada",
     ];
 
-    const [price, setPrice] = useState();
-
     const handleGear = (event) => {
         setGearbox(event.target.value);
     };
@@ -89,7 +88,13 @@ const App = () => {
         )
             .then((res) => res.json())
             .then((res) => {
-                setPrice(Math.round(res.price * 26.5) + " CZK");
+                const p = Math.round(res.price * 26.5) + " CZK";
+                swal({
+                    title: "Price",
+                    text: p,
+                    icon: "warning",
+                    confirmButtonClass: "btn-danger",
+                });
             })
             .catch((res) => {
                 console.log(res);
@@ -109,7 +114,7 @@ const App = () => {
                     <TextField style={{ marginTop: 10 }} label="Year" variant="outlined" type="text" {...year} />
                     <br />
 
-                    <FormControl fullWidth variant="filled">
+                    <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
                         <InputLabel>Brand</InputLabel>
                         <Select name="brand" value={brand} onChange={handleBrand}>
                             {brands.map((c) => (
@@ -179,9 +184,8 @@ const App = () => {
                         check price
                     </Button>
                     <br />
+                    <br />
                 </form>
-                <br />
-                <Typography variant="h2">{price}</Typography>
             </header>
         </div>
     );
