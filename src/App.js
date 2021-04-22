@@ -3,13 +3,17 @@ import { useInput } from "./useInput";
 import { TextField, Button, Typography } from "@material-ui/core";
 import logo from "./assets/orange-car-hp-right-mercedez.png";
 import "./App.css";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
 
 const App = () => {
     const [year] = useInput("");
     const [brand] = useInput("");
     const [model] = useInput("");
     const [vehicle] = useInput("");
-    const [gearbox] = useInput("");
+    const [gearbox, setGearbox] = useState("manuell");
     const [kilo] = useInput("");
     const [power] = useInput("");
     const [fueltype] = useInput("");
@@ -17,10 +21,14 @@ const App = () => {
 
     const [price, setPrice] = useState();
 
+    const handleChange = (event) => {
+        setGearbox(event.target.value);
+    };
+
     const searchHandler = (e) => {
         e.preventDefault();
         fetch(
-            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox.value}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype.value}&notrepaireddamage=${notrepaireddamage.value}`
+            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype.value}&notrepaireddamage=${notrepaireddamage.value}`
         )
             .then((res) => res.json())
             .then((res) => {
@@ -51,7 +59,14 @@ const App = () => {
                         {...vehicle}
                     />
                     <br />
-                    <TextField style={{ marginTop: 10 }} label="Gearbox" variant="outlined" type="text" {...gearbox} />
+                    <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
+                        <InputLabel>Gearbox</InputLabel>
+                        <Select name="gearbox" value={gearbox} onChange={handleChange}>
+                            <MenuItem value={"manuell"}>Manual</MenuItem>
+                            <MenuItem value={"automatik"}>Automatic</MenuItem>
+                        </Select>
+                    </FormControl>
+
                     <br />
                     <TextField style={{ marginTop: 10 }} label="Kilometers" variant="outlined" type="text" {...kilo} />
                     <br />
@@ -80,9 +95,7 @@ const App = () => {
                     <br />
                 </form>
                 <br />
-                <Typography color="black" variant="h3">
-                    {price}
-                </Typography>
+                <Typography variant="h2">{price}</Typography>
             </header>
         </div>
     );
