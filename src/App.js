@@ -37,23 +37,41 @@ const App = () => {
                 <img src={logo} className="App-logo" alt="logo" />
 
                 <form onSubmit={searchHandler} className="search">
-                    <TextField label="Year" variant="outlined" type="text" {...year} />
+                    <TextField style={{ marginTop: 10 }} label="Year" variant="outlined" type="text" {...year} />
                     <br />
-                    <TextField label="Brand" variant="outlined" type="text" {...brand} />
+                    <TextField style={{ marginTop: 10 }} label="Brand" variant="outlined" type="text" {...brand} />
                     <br />
-                    <TextField label="Model" variant="outlined" type="text" {...model} />
+                    <TextField style={{ marginTop: 10 }} label="Model" variant="outlined" type="text" {...model} />
                     <br />
-                    <TextField label="Vehicle type" variant="outlined" type="text" {...vehicle} />
+                    <TextField
+                        style={{ marginTop: 10 }}
+                        label="Vehicle type"
+                        variant="outlined"
+                        type="text"
+                        {...vehicle}
+                    />
                     <br />
-                    <TextField label="Gearbox" variant="outlined" type="text" {...gearbox} />
+                    <TextField style={{ marginTop: 10 }} label="Gearbox" variant="outlined" type="text" {...gearbox} />
                     <br />
-                    <TextField label="Kilometers" variant="outlined" type="text" {...kilo} />
+                    <TextField style={{ marginTop: 10 }} label="Kilometers" variant="outlined" type="text" {...kilo} />
                     <br />
-                    <TextField label="Power" variant="outlined" type="text" {...power} />
+                    <TextField style={{ marginTop: 10 }} label="Power" variant="outlined" type="text" {...power} />
                     <br />
-                    <TextField label="fueltype" variant="outlined" type="text" {...fueltype} />
+                    <TextField
+                        style={{ marginTop: 10 }}
+                        label="Fuel Type"
+                        variant="outlined"
+                        type="text"
+                        {...fueltype}
+                    />
                     <br />
-                    <TextField label="notrepaireddamage" variant="outlined" type="text" {...notrepaireddamage} />
+                    <TextField
+                        style={{ marginTop: 10 }}
+                        label="Not Repaired Damage"
+                        variant="outlined"
+                        type="text"
+                        {...notrepaireddamage}
+                    />
                     <br />
                     <br />
                     <Button type="submit" variant="contained" color="secondary">
