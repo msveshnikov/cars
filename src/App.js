@@ -12,13 +12,15 @@ const App = () => {
     const [gearbox] = useInput("");
     const [kilo] = useInput("");
     const [power] = useInput("");
+    const [fueltype] = useInput("");
+    const [notrepaireddamage] = useInput("");
 
     const [price, setPrice] = useState();
 
     const searchHandler = (e) => {
         e.preventDefault();
         fetch(
-            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox.value}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=benzin&notrepaireddamage=nein`
+            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox.value}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype.value}&notrepaireddamage=${notrepaireddamage.value}`
         )
             .then((res) => res.json())
             .then((res) => {
@@ -45,9 +47,13 @@ const App = () => {
                     <br />
                     <TextField label="Gearbox" variant="outlined" type="text" {...gearbox} />
                     <br />
-                    <TextField label="Mileage" variant="outlined" type="text" {...kilo} />
+                    <TextField label="Kilometers" variant="outlined" type="text" {...kilo} />
                     <br />
                     <TextField label="Power" variant="outlined" type="text" {...power} />
+                    <br />
+                    <TextField label="fueltype" variant="outlined" type="text" {...fueltype} />
+                    <br />
+                    <TextField label="notrepaireddamage" variant="outlined" type="text" {...notrepaireddamage} />
                     <br />
                     <br />
                     <Button type="submit" variant="contained" color="secondary">

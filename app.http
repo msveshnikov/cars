@@ -1,0 +1,30 @@
+GET http://localhost:5000 HTTP/1.1
+content-type: application/json
+
+{
+    "yearofregistration": 2010,
+    "vehicletype": "kleinwagen",
+    "powerps": 292,
+    "gearbox": "automatik",
+    "brand": "porsche",
+    "model": "logo",
+    "kilometer": 22000,
+    "fueltype": "benzin",
+    "notrepaireddamage": "nein"
+}
+
+##################
+GET https://elk.maxsoft.shop HTTP/1.1
+content-type: application/json
+
+{
+    "yearofregistration": 2005,
+    "vehicletype": "cabrio",
+    "powerps": 292,
+    "gearbox": "automatik",
+    "brand": "porsche",
+    "model": "shit",
+    "kilometer": 223000,
+    "fueltype": "benzin",
+    "notrepaireddamage": "nein"
+}
