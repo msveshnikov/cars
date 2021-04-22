@@ -10,7 +10,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 
 const App = () => {
     const [year] = useInput("");
-    const [brand] = useInput("");
+    const [brand, setBrand] = useState("ford");
     const [model] = useInput("");
     const [vehicle, setVehicle] = useState("limousine");
     const [gearbox, setGearbox] = useState("manuell");
@@ -18,6 +18,47 @@ const App = () => {
     const [power] = useInput("");
     const [fueltype, setFueltype] = useState("benzin");
     const [notrepaireddamage, setNotrepaireddamage] = useState("nein");
+    const brands = [
+        "volkswagen",
+        "sonstige_autos",
+        "lancia",
+        "ford",
+        "opel",
+        "mercedes_benz",
+        "toyota",
+        "audi",
+        "bmw",
+        "mitsubishi",
+        "fiat",
+        "nissan",
+        "renault",
+        "mazda",
+        "subaru",
+        "peugeot",
+        "smart",
+        "mini",
+        "hyundai",
+        "dacia",
+        "porsche",
+        "alfa_romeo",
+        "daewoo",
+        "saab",
+        "kia",
+        "chevrolet",
+        "volvo",
+        "skoda",
+        "seat",
+        "citroen",
+        "suzuki",
+        "honda",
+        "jeep",
+        "jaguar",
+        "daihatsu",
+        "land_rover",
+        "chrysler",
+        "rover",
+        "lada",
+    ];
 
     const [price, setPrice] = useState();
 
@@ -37,10 +78,14 @@ const App = () => {
         setVehicle(event.target.value);
     };
 
+    const handleBrand = (event) => {
+        setBrand(event.target.value);
+    };
+
     const searchHandler = (e) => {
         e.preventDefault();
         fetch(
-            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype}&notrepaireddamage=${notrepaireddamage}`
+            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand}&model=${model.value}&vehicletype=${vehicle}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype}&notrepaireddamage=${notrepaireddamage}`
         )
             .then((res) => res.json())
             .then((res) => {
@@ -51,6 +96,10 @@ const App = () => {
             });
     };
 
+    function capitalize(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     return (
         <div className="App">
             <header className="App-header">
@@ -59,7 +108,18 @@ const App = () => {
                 <form onSubmit={searchHandler} className="search">
                     <TextField style={{ marginTop: 10 }} label="Year" variant="outlined" type="text" {...year} />
                     <br />
-                    <TextField style={{ marginTop: 10 }} label="Brand" variant="outlined" type="text" {...brand} />
+
+                    <FormControl fullWidth variant="filled">
+                        <InputLabel>Brand</InputLabel>
+                        <Select name="brand" value={brand} onChange={handleBrand}>
+                            {brands.map((c) => (
+                                <MenuItem key={c} value={c}>
+                                    {capitalize(c)}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
                     <br />
                     <TextField style={{ marginTop: 10 }} label="Model" variant="outlined" type="text" {...model} />
                     <br />
