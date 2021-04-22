@@ -16,19 +16,27 @@ const App = () => {
     const [gearbox, setGearbox] = useState("manuell");
     const [kilo] = useInput("");
     const [power] = useInput("");
-    const [fueltype] = useInput("");
-    const [notrepaireddamage] = useInput("");
+    const [fueltype, setFueltype] = useState("benzin");
+    const [notrepaireddamage, setNotrepaireddamage] = useState("nein");
 
     const [price, setPrice] = useState();
 
-    const handleChange = (event) => {
+    const handleGear = (event) => {
         setGearbox(event.target.value);
+    };
+
+    const handleRepair = (event) => {
+        setNotrepaireddamage(event.target.value);
+    };
+
+    const handleFuel = (event) => {
+        setFueltype(event.target.value);
     };
 
     const searchHandler = (e) => {
         e.preventDefault();
         fetch(
-            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype.value}&notrepaireddamage=${notrepaireddamage.value}`
+            `https://elk.maxsoft.shop/?yearofregistration=${year.value}&brand=${brand.value}&model=${model.value}&vehicletype=${vehicle.value}&gearbox=${gearbox}&kilometer=${kilo.value}&powerps=${power.value}&fueltype=${fueltype}&notrepaireddamage=${notrepaireddamage}`
         )
             .then((res) => res.json())
             .then((res) => {
@@ -61,7 +69,7 @@ const App = () => {
                     <br />
                     <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
                         <InputLabel>Gearbox</InputLabel>
-                        <Select name="gearbox" value={gearbox} onChange={handleChange}>
+                        <Select name="gearbox" value={gearbox} onChange={handleGear}>
                             <MenuItem value={"manuell"}>Manual</MenuItem>
                             <MenuItem value={"automatik"}>Automatic</MenuItem>
                         </Select>
@@ -71,22 +79,30 @@ const App = () => {
                     <TextField style={{ marginTop: 10 }} label="Kilometers" variant="outlined" type="text" {...kilo} />
                     <br />
                     <TextField style={{ marginTop: 10 }} label="Power" variant="outlined" type="text" {...power} />
+
                     <br />
-                    <TextField
-                        style={{ marginTop: 10 }}
-                        label="Fuel Type"
-                        variant="outlined"
-                        type="text"
-                        {...fueltype}
-                    />
+                    <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
+                        <InputLabel>Fuel Type</InputLabel>
+                        <Select name="fueltype" value={fueltype} onChange={handleFuel}>
+                            <MenuItem value={"benzin"}>Gasoline</MenuItem>
+                            <MenuItem value={"diesel"}>Diesel</MenuItem>
+                            <MenuItem value={"hybrid"}>Hybrid</MenuItem>
+                            <MenuItem value={"lpg"}>LPG</MenuItem>
+                            <MenuItem value={"cng"}>CNG</MenuItem>
+                            <MenuItem value={"elektro"}>Electro</MenuItem>
+                            <MenuItem value={"andere"}>Other</MenuItem>
+                        </Select>
+                    </FormControl>
+
                     <br />
-                    <TextField
-                        style={{ marginTop: 10 }}
-                        label="Not Repaired Damage"
-                        variant="outlined"
-                        type="text"
-                        {...notrepaireddamage}
-                    />
+                    <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
+                        <InputLabel>Damaged</InputLabel>
+                        <Select name="notrepaireddamage" value={notrepaireddamage} onChange={handleRepair}>
+                            <MenuItem value={"nein"}>No</MenuItem>
+                            <MenuItem value={"ja"}>Yes</MenuItem>
+                        </Select>
+                    </FormControl>
+
                     <br />
                     <br />
                     <Button type="submit" variant="contained" color="secondary">
