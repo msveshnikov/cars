@@ -88,7 +88,9 @@ const App = () => {
         )
             .then((res) => res.json())
             .then((res) => {
-                const p = Math.round(res.price * 26.5) + " CZK";
+                const p = Math.round(res.price * 26.5) + " CZK"+"\n"+
+                    Math.round(res.price * 80) + " RUB"+"\n"+
+                    Math.round(res.price) + " EUR";
                 swal({
                     title: "Price",
                     text: p,
