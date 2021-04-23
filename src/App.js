@@ -88,9 +88,15 @@ const App = () => {
         )
             .then((res) => res.json())
             .then((res) => {
-                const p = Math.round(res.price * 26.5) + " CZK"+"\n"+
-                    Math.round(res.price * 80) + " RUB"+"\n"+
-                    Math.round(res.price) + " EUR";
+                const p =
+                    Math.round(res.price * 26.5) +
+                    " CZK" +
+                    "\n" +
+                    Math.round(res.price * 80) +
+                    " RUB" +
+                    "\n" +
+                    Math.round(res.price) +
+                    " EUR";
                 swal({
                     title: "Price",
                     text: p,
@@ -155,7 +161,13 @@ const App = () => {
                     <br />
                     <TextField style={{ marginTop: 10 }} label="Kilometers" variant="outlined" type="text" {...kilo} />
                     <br />
-                    <TextField style={{ marginTop: 10 }} label="Horse Power" variant="outlined" type="text" {...power} />
+                    <TextField
+                        style={{ marginTop: 10 }}
+                        label="Horse Power"
+                        variant="outlined"
+                        type="text"
+                        {...power}
+                    />
 
                     <br />
                     <FormControl style={{ marginTop: 10 }} fullWidth variant="filled">
